@@ -38,6 +38,15 @@ restore_confirm() {
   [[ $ans =~ [yY] ]] || { loginfo "Exiting restore"; exit 0; }
 }
 
+snapshot_cleanup() {
+  if $DRY_RUN; then
+    loginfo "DRY RUN: Would have deleted old snapshots"
+  else
+    loginfo "Deleting old snapshots"
+    $NODETOOL clearsnapshot
+  fi
+}
+
 for arg in "$@"; do shift; set -- "$@" "${arg//--/-}"; done
 while getopts 'a:b:BcCd:DfhH:iIjkl:LnN:p:rs:S:T:u:U:vwy:z' OPTION; do
   case $OPTION in
