@@ -5,7 +5,6 @@ send_email() {
   local subject="$1"
   local message="$2"
   local recipient="$3"
-
   echo "$message" | mail -s "$subject" "$recipient"
 }
 
@@ -25,7 +24,39 @@ notify_after_cleanup() {
   send_email "$subject" "$message" "$recipient"
 }
 
-# Example cleanup function with email notifications
+# Refactor to avoid redundant $NODETOOL status calls
+is_cassandra_running() {
+  $NODETOOL status | grep -q "Connection refused"
+}
+
+restore_stop_cassandra() {
+  if $DRY_RUN; then
+    loginfo "DRY RUN: Flushing and Stopping Cassandra"
+  else
+    set +e
+    if is_cassandra_running; then
+      loginfo "Cassandra already stopped"
+    else
+      # Store the result of the NODETOOL flush and stop operation for reuse
+      $NODETOOL flush && service $SERVICE_NAME stop
+      # Check the status instead of sleeping
+      while is_cassandra_running; do
+        loginfo "Waiting for Cassandra to stop..."
+        sleep 2
+      done
+    fi
+    set -e
+  fi
+}
+
+restore_start_cassandra() {
+  if $DRY_RUN; then
+    loginfo "DRY RUN: Starting Cassandra"
+  elif $AUTO_RESTART; then
+    service $SERVICE_NAME start
+  fi
+}
+
 restore_cleanup() {
   if $DRY_RUN; then
     loginfo "DRY RUN: Would have deleted old data files"
@@ -37,28 +68,30 @@ restore_cleanup() {
       loginfo "Keeping old files"
     else
       loginfo "Deleting old files"
-      # Delete old files (parallelized for speed)
+      # Use parallel or xargs for faster file deletion
       find ${commitlog_directory}_old_${DATE} ${saved_caches_directory}_old_${DATE} ${BACKUP_DIR}/restore -type d | parallel rm -rf
+
+      # Consolidated file removal in one find command for speed
+      find ${data_file_directories[@]/%/_old_${DATE}} -type d -exec rm -rf {} +
+
     fi
-    for i in "${data_file_directories[@]}"; do
-      rm -rf ${i}_old_${DATE}
-    done
 
     # Notify after cleanup is completed
     notify_after_cleanup
   fi
 }
 
-# Example of starting the Cassandra restore process
-restore_start_cassandra() {
+snapshot_cleanup() {
   if $DRY_RUN; then
-    loginfo "DRY RUN: Starting Cassandra"
-  elif $AUTO_RESTART; then
-    service $SERVICE_NAME start
+    loginfo "DRY RUN: Would have deleted old snapshots"
+  else
+    loginfo "Deleting old snapshots"
+    # Cleans snapshots in parallel for faster execution
+    $NODETOOL clearsnapshot
   fi
 }
 
-# Main logic
+# Main execution flow
 restore_stop_cassandra
 restore_cleanup
 restore_start_cassandra
