@@ -6,6 +6,7 @@ def send_email(subject, message, recipient):
     command = f'echo "{message}" | mail -s "{subject}" "{recipient}"'
     os.system(command)
 
+#function for notification before cleanup
 def notify_before_cleanup():
     subject = "Cassandra Cleanup Starting"
     message = "The Cassandra cleanup process is starting. Please be aware that old data files, snapshots, and commit logs will be deleted."
