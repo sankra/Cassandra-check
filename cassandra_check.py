@@ -14,6 +14,7 @@ def notify_before_cleanup():
     recipient = "your-email@example.com"  # Replace with actual recipient email address
     send_email(subject, message, recipient)
 
+#function for notification after cleanup
 def notify_after_cleanup():
     subject = "Cassandra Cleanup Completed"
     message = "The Cassandra cleanup process has been completed successfully. All old data files, snapshots, and commit logs have been deleted (or retained based on your settings)."
