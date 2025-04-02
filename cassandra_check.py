@@ -21,6 +21,7 @@ def notify_after_cleanup():
     recipient = "your-email@example.com"  # Replace with actual recipient email address
     send_email(subject, message, recipient)
 
+#function to run 
 def is_cassandra_running():
     result = subprocess.run(["nodetool", "status"], capture_output=True, text=True)
     return "Connection refused" not in result.stdout
@@ -69,6 +70,7 @@ def snapshot_cleanup():
     else:
         print("Deleting old snapshots")
         subprocess.run(["nodetool", "clearsnapshot"])
+
 
 # Main execution flow
 restore_stop_cassandra()
