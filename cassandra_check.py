@@ -2,6 +2,7 @@ import os
 import subprocess
 import time
 
+#function for draft email to send notifications
 def send_email(subject, message, recipient):
     command = f'echo "{message}" | mail -s "{subject}" "{recipient}"'
     os.system(command)
