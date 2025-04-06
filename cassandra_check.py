@@ -74,7 +74,7 @@ def snapshot_cleanup():
         subprocess.run(["nodetool", "clearsnapshot"])
 
 
-# Main execution flow
+# Main execution flow (calling the functions)
 restore_stop_cassandra()
 restore_cleanup()
 restore_start_cassandra()
