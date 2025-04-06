@@ -28,11 +28,11 @@ This script automates the cleanup process for a Cassandra database, ensuring tha
 - Uses `find` and `parallel/xargs` to efficiently delete directories.
 
 #### `snapshot_cleanup`
-- Deletes old snapshots using `nodetool clearsnapshot`.
+- Deletes old snapshots using `nodetool clearsnapshot`
 
 ### 4️⃣ Restarts Cassandra After Cleanup
 #### `restore_start_cassandra`
-- Restarts Cassandra (if `$AUTO_RESTART` is enabled).
+- Restarts Cassandra (if `$AUTO_RESTART` is enabled)
 
 ---
 
