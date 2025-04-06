@@ -46,6 +46,7 @@ def restore_start_cassandra():
     elif os.getenv("AUTO_RESTART"):
         subprocess.run(["service", os.getenv("SERVICE_NAME", "cassandra"), "start"])
 
+#function to restore the cleanup process
 def restore_cleanup():
     if os.getenv("DRY_RUN"):
         print("DRY RUN: Would have deleted old data files")
