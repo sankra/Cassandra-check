@@ -26,6 +26,7 @@ def is_cassandra_running():
     result = subprocess.run(["nodetool", "status"], capture_output=True, text=True)
     return "Connection refused" not in result.stdout
 
+#function to restore stop cassandra db
 def restore_stop_cassandra():
     if os.getenv("DRY_RUN"):
         print("DRY RUN: Flushing and Stopping Cassandra")
