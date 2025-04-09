@@ -46,7 +46,7 @@ public class CassandraCleanup {
         runCommand("service " + getEnvOrDefault("SERVICE_NAME", "cassandra") + " stop");
 
         while (isCassandraRunning()) {
-            System.out.println("Waiting for Cassandra to stop...");
+            System.out.println("Waiting for Cassandra database to stop...");
             sleep(2000);
         }
     }
