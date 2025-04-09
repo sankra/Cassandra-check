@@ -33,7 +33,7 @@ public class CassandraCleanup {
 
     private static void restoreStopCassandra() {
         if (System.getenv("DRY_RUN") != null) {
-            System.out.println("DRY RUN: Flushing and Stopping Cassandra");
+            System.out.println("DRY RUN: Flushing and Stopping Cassandra Database");
             return;
         }
 
