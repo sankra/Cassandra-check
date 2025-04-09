@@ -38,7 +38,7 @@ public class CassandraCleanup {
         }
 
         if (!isCassandraRunning()) {
-            System.out.println("Cassandra already stopped");
+            System.out.println("Cassandra database has already stopped");
             return;
         }
 
