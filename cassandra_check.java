@@ -13,7 +13,7 @@ public class CassandraCleanup {
     }
 
     private static void notifyBeforeCleanup() {
-        String subject = "Cassandra Cleanup Starting";
+        String subject = "Cassandra Cleanup i getting Started";
         String message = "The Cassandra cleanup process is starting. Please be aware that old data files, snapshots, and commit logs will be deleted.";
         String recipient = "your-email@example.com"; // Replace with actual recipient
         sendEmail(subject, message, recipient);
