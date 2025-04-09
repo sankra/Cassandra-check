@@ -53,7 +53,7 @@ public class CassandraCleanup {
 
     private static void restoreStartCassandra() {
         if (System.getenv("DRY_RUN") != null) {
-            System.out.println("DRY RUN: Starting Cassandra");
+            System.out.println("DRY RUN: Starting Cassandra Database");
         } else if (System.getenv("AUTO_RESTART") != null) {
             runCommand("service " + getEnvOrDefault("SERVICE_NAME", "cassandra") + " start");
         }
