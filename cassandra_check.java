@@ -20,7 +20,7 @@ public class CassandraCleanup {
     }
 
     private static void notifyAfterCleanup() {
-        String subject = "Cassandra Cleanup Completed";
+        String subject = "Cassandra Cleanup task has been Completed";
         String message = "The Cassandra cleanup process has been completed successfully. All old data files, snapshots, and commit logs have been deleted (or retained based on your settings).";
         String recipient = "your-email@example.com"; // Replace with actual recipient
         sendEmail(subject, message, recipient);
