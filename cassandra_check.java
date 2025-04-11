@@ -90,7 +90,7 @@ public class CassandraCleanup {
         if (System.getenv("DRY_RUN") != null) {
             System.out.println("DRY RUN: Would have deleted the old snapshots");
         } else {
-            System.out.println("Deleting old snapshots");
+            System.out.println("Deleting the old snapshots");
             runCommand("nodetool clearsnapshot");
         }
     }
