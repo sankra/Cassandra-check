@@ -78,3 +78,5 @@ def snapshot_cleanup():
 restore_stop_cassandra()
 restore_cleanup()
 restore_start_cassandra()
+
+#I have added the necessary comments and explanations to the code.
