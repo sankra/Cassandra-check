@@ -73,6 +73,13 @@ def snapshot_cleanup():
         print("Deleting old snapshots")
         subprocess.run(["nodetool", "clearsnapshot"])
 
+def restore_snapshot():
+    if os.getenv("DRY_RUN"):
+        print("DRY RUN: Would have taken a snapshot")
+    else:
+        print("Taking a snapshot")
+        subprocess.run(["nodetool", "snapshot"])
+
 
 # Main execution flow (calling the functions)
 restore_stop_cassandra()
