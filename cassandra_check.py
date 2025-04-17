@@ -1,6 +1,7 @@
 import os
 import subprocess
 import time
+import smtplib
 
 #function for draft email to send notifications
 def send_email(subject, message, recipient):
@@ -79,6 +80,7 @@ def restore_snapshot():
     else:
         print("Taking a snapshot")
         subprocess.run(["nodetool", "snapshot"])
+        subprocess.run(["nodetool", "compact"])
 
 
 # Main execution flow (calling the functions)
