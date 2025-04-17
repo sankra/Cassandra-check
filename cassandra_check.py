@@ -1,6 +1,7 @@
 import os
 import subprocess
 import time
+import smtplib
 
 #function for draft email to send notifications
 def send_email(subject, message, recipient):
@@ -72,6 +73,14 @@ def snapshot_cleanup():
     else:
         print("Deleting old snapshots")
         subprocess.run(["nodetool", "clearsnapshot"])
+
+def restore_snapshot():
+    if os.getenv("DRY_RUN"):
+        print("DRY RUN: Would have taken a snapshot")
+    else:
+        print("Taking a snapshot")
+        subprocess.run(["nodetool", "snapshot"])
+        subprocess.run(["nodetool", "compact"])
 
 
 # Main execution flow (calling the functions)
