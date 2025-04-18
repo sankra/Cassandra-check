@@ -39,5 +39,8 @@ This script automates the cleanup process for a Cassandra database, ensuring tha
 ## Usage
 To run the script, ensure Cassandra is installed and configured properly. Modify the script variables as needed, then execute:
 
+## Performance
+The casandra_check.py and cassandra_check.java files will be used to perfrom cassandra cleanup operations but the casandra_check.py is efficient file compared to the .java file.
+
 ```bash
 ./cleanup_script.sh
