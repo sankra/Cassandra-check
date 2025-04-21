@@ -81,6 +81,9 @@ def restore_snapshot():
         print("Taking a snapshot")
         subprocess.run(["nodetool", "snapshot"])
         subprocess.run(["nodetool", "compact"])
+        subprocess.run(["nodetool", "cleanup"])
+        subprocess.run(["nodetool", "repair"])
+        subprocess.run(["nodetool", "refresh"])
 
 
 # Main execution flow (calling the functions)
