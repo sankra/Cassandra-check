@@ -138,4 +138,11 @@ public class CassandraCleanup {
         restoreCleanup();
         restoreStartCassandra();
     }
+    private static void runCommand(String command) {
+        try {
+            Process process = Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", command});
+            process.waitFor();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
 }
