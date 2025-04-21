@@ -91,6 +91,7 @@ snapshot_cleanup() {
   fi
 }
 
+
 # Main execution flow
 restore_stop_cassandra
 restore_cleanup
