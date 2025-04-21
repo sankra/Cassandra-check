@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
+import javax.mail.Message;
 
 public class CassandraCleanup {
 
@@ -145,4 +147,5 @@ public class CassandraCleanup {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+    
 }
