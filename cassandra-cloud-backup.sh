@@ -84,12 +84,16 @@ restore_cleanup() {
 snapshot_cleanup() {
   if $DRY_RUN; then
     loginfo "DRY RUN: Would have deleted old snapshots"
+    loginfo "DRY RUN: Would have deleted old commit logs"
   else
     loginfo "Deleting old snapshots"
     # Cleans snapshots in parallel for faster execution
     $NODETOOL clearsnapshot
+    find ${data_file_directories[@]/%/_old_${DATE}} -type d -name "snap-*" | parallel rm -rf
   fi
 }
+
+
 
 # Main execution flow
 restore_stop_cassandra

@@ -62,6 +62,8 @@ def restore_cleanup():
                 f"{os.getenv('COMMITLOG_DIRECTORY')}_old_{date}",
                 f"{os.getenv('SAVED_CACHES_DIRECTORY')}_old_{date}",
                 f"{os.getenv('BACKUP_DIR')}/restore"
+                f"{os.getenv('SNAPSHOT_DIR')}/restore",
+                f"{os.getenv('DATA_DIRECTORY')}/restore",
             ]
             for directory in directories:
                 subprocess.run(["rm", "-rf", directory])
@@ -84,6 +86,8 @@ def restore_snapshot():
         subprocess.run(["nodetool", "cleanup"])
         subprocess.run(["nodetool", "repair"])
         subprocess.run(["nodetool", "refresh"])
+        subprocess.run(["nodetool", "scrub"])
+        subprocess.run(["nodetool", "compact"])
 
 
 # Main execution flow (calling the functions)
