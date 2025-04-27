@@ -147,5 +147,18 @@ public class CassandraCleanup {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-    
+    private static String runCommandWithOutput(String command) {
+        StringBuilder output = new StringBuilder();
+        try {
+            Process process = Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", command});
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.append(line).append("\n");
+            }
+            process.waitFor();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return output.toString();
 }
