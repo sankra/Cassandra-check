@@ -1,3 +1,4 @@
 #This is the project information file.
 
-this project is all about the Cassandra data base.
+This project is all about the Cassandra data base.
+This project  automatically created and delivers the file that is importantly to create the database. 
