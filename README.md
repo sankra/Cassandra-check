@@ -25,7 +25,7 @@ This script automates the cleanup process for a Cassandra database, ensuring tha
 ### 3️⃣ Performs Cleanup
 #### `restore_cleanup`
 - Deletes old data files, snapshots, and commit logs (unless `$KEEP_OLD_FILES` is set).
-- Uses `find` and `parallel/xargs` to efficiently delete directories.
+- Uses `find` and `parallel/xargs` to efficiently delete the directories.
 
 #### `snapshot_cleanup`
 - Deletes old snapshots using `nodetool clearsnapshot`
